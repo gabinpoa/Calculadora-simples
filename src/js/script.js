@@ -1,6 +1,6 @@
 const buttons = document.querySelectorAll("button");
 const display = document.querySelector(".display");
-let showingResults = false;
+let isShowingResults = false;
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
     addToDisplay(button.innerText);
@@ -8,17 +8,23 @@ buttons.forEach((button) => {
 });
 
 function addToDisplay(value) {
-  showingResults = false;
+  newCalculation();
   if (value === "AC") {
     display.innerText = "";
-    showingResults = false;
+    isShowingResults = false;
   } else if (value === "C") {
     display.innerText = display.innerText.slice(0, -1);
-    showingResults = false;
+    isShowingResults = false;
   } else if (value === "=") {
     display.innerText = eval(display.innerText);
-    showingResults = true;
+    isShowingResults = true;
   } else {
     display.innerText += value;
+    isShowingResults = false;
+  }
+}
+function newCalculation() {
+  if (isShowingResults === true) {
+    display.innerText = "";
   }
 }
