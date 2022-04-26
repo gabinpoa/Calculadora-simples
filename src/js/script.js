@@ -1,38 +1,24 @@
-const calculatorContainer = document.createElement("div");
-const displayContainer = document.createElement("div");
-
-calculatorContainer.classList = "calculator";
-displayContainer.classList = "display";
-
-calculatorContainer.append(displayContainer);
-document.body.append(calculatorContainer);
-
-const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-const operators = ["*", "/", "+", "-", "."];
-const specialValues = ["C", "AC", "="];
-const values = [...operators, ...numbers, ...specialValues];
-
-values.forEach((value) => {
-  let button = document.createElement("button");
-  if ((value === "=") | (value === "AC")) {
-    button.classList = "span2";
-  }
-  button.type = "button";
-  button.innerText = value;
-  calculatorContainer.append(button);
+const buttons = document.querySelectorAll("button");
+const display = document.querySelector(".display");
+let showingResults = false;
+buttons.forEach((button) => {
   button.addEventListener("click", () => {
-    addToDisplay(value);
+    addToDisplay(button.innerText);
   });
 });
 
 function addToDisplay(value) {
+  showingResults = false;
   if (value === "AC") {
-    displayContainer.innerText = "";
+    display.innerText = "";
+    showingResults = false;
   } else if (value === "C") {
-    displayContainer.innerText = displayContainer.innerText.slice(0, -1);
+    display.innerText = display.innerText.slice(0, -1);
+    showingResults = false;
   } else if (value === "=") {
-    displayContainer.innerText = eval(displayContainer.innerText);
+    display.innerText = eval(display.innerText);
+    showingResults = true;
   } else {
-    displayContainer.innerText += value;
+    display.innerText += value;
   }
 }

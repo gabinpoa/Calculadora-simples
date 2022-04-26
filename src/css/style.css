@@ -14,7 +14,7 @@ body {
     grid-template-rows: repeat(6, 5rem);
 }
 
-.span2 {
+.spanTwo {
     grid-column: span 2;
 }
 
